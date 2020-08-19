@@ -1,1 +1,1 @@
-# ScratchSleepMethodPaperQC
+# Scratch Sleep Method Paper QC
