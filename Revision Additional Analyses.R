@@ -72,7 +72,7 @@ data = readr::read_csv("/Volumes/PfIRe-SQUAD/scratch_dev/reference_annotation_ma
 duration = as.numeric(data$annotation_stop_time - data$annotation_start_time)
 cat_dur = cut(duration, breaks = c(0,1,2,3,Inf),right = T)
 print(table(cat_dur))
-print(table(cat_dur)/3629 * 100)
+print(table(cat_dur)/nrow(data) * 100)
 
 
 # 3. Performance by ISGA and Gender ---------------------------------------
@@ -80,7 +80,7 @@ rm(list = ls())
 library(tableone)
 dat = readr::read_csv("/Volumes/PfIRe-SQUAD/scratch_dev/model_development/model_training/trained_models/random_forest/20hz/FINAL_MODEL_RESULTS_2_7_20/per_subject_validation_performance.csv",)
 cov_data = read.sas7bdat("~/OneDrive - Pfizer/SQUAD Study Programming Analysis Tables Quanticate/Quanticate Derived Datasets and Documentation/Training Set Demography Dataset/demo_pro_train.sas7bdat") %>%
-  select(SUBJECT, GENDER,ISGA_V0) %>%
+  select(SUBJECT, GENDER,ISGA_V0, ISGA_V5) %>%
   rename(subject = SUBJECT) 
 dat = merge(x = dat, y = cov_data )
 
@@ -88,10 +88,12 @@ tab1 = CreateTableOne(vars = names(dat)[2:11], data = dat,strata = "GENDER")
 tab1.1 = print(tab1,nonnormal = names(dat)[2:11])
 tab2 = CreateTableOne(vars = names(dat)[2:11], data = dat,strata = "ISGA_V0")
 tab2.1 = print(tab2,nonnormal = names(dat)[2:11])
+tab3 = CreateTableOne(vars = names(dat)[2:11], data = dat,strata = "ISGA_V5")
+tab3.1 = print(tab3,nonnormal = names(dat)[2:11])
 
 write.csv(tab1.1, file = "results/revision/Performance_by_Gender.csv")
 write.csv(tab2.1, file = "results/revision/Performance_by_ISGA.csv")
-
+write.csv(tab3.1, file = "results/revision/Performance_by_ISGAV5.csv")
 
 # 4. Summary Statistics ---------------------------------------------------
 rm(list = ls())
