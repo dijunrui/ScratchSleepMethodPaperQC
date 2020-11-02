@@ -85,8 +85,8 @@ for(i in 1:2){
          col = c("black","red"), lwd = c(2,3),cex = 1.8)
   abline(lm(acc~vid, data = dat), col = "red", lty = 1, lwd = 3)
   abline(a = 0, b = 1, lty = 1, lwd = 2)
-  legend("bottomleft",legend = c("V01","V02"),pch = c(18,20), bty = "n",
-         col = cl,cex = 2.8)
+  legend("bottomleft",legend = c("V01","V02"),pch = c(20,18), bty = "n",
+         col = c("#00000066", "#A52A2A66"),cex = 2.8)
   
   
   BAplot2(ave = dat$mean, dif = dat$diff, mean.diffs = mean_adjust, sd_diff = sd_adjust,var1 = "ScratchPy Prediction", 
