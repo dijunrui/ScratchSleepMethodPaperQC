@@ -51,6 +51,9 @@ for(i in 1:2){
   var_intercept = as.numeric(getVarCov(mixd_model1))
   var_residual = (mixd_model1$sigma)^2
   sd_adjust = sqrt(var_intercept + var_residual)
+  mean_adjust = mixd_model1$coefficients$fixed[1]
+  
+  
   
   print(data_dictionary$titles[i])
   print(paste0("Variance of Intercept: ", var_intercept, ", Variance of Residual: ", var_residual, ", Adjusted SD: ", sd_adjust))
@@ -82,11 +85,11 @@ for(i in 1:2){
          col = c("black","red"), lwd = c(2,3),cex = 1.8)
   abline(lm(acc~vid, data = dat), col = "red", lty = 1, lwd = 3)
   abline(a = 0, b = 1, lty = 1, lwd = 2)
-  legend("bottomleft",legend = c("V01","V02"),pch = c(20,18), bty = "n",
+  legend("bottomleft",legend = c("V01","V02"),pch = c(18,20), bty = "n",
          col = cl,cex = 2.8)
   
   
-  BAplot2(ave = dat$mean, dif = dat$diff, sd_diff = sd_adjust,var1 = "ScratchPy Prediction", 
+  BAplot2(ave = dat$mean, dif = dat$diff, mean.diffs = mean_adjust, sd_diff = sd_adjust,var1 = "ScratchPy Prediction", 
           var2 = "Video Annotation",title = data_dictionary$titles[i],bar = 1,
           group = dat$avisitn)
   
