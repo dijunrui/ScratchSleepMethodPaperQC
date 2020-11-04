@@ -13,6 +13,7 @@
 
 
 rm(list = ls())
+library(sas7bdat)
 library(nlme)
 library(MuMIn)
 setwd("~/Pfizer/DMTI CT-44 Scratch Sleep Team - Scratch and Sleep Methods Paper/QCed Plots/") ## Location where created plots are saved
@@ -56,7 +57,8 @@ for(i in 1:2){
   
   
   print(data_dictionary$titles[i])
-  print(paste0("Variance of Intercept: ", var_intercept, ", Variance of Residual: ", var_residual, ", Adjusted SD: ", sd_adjust))
+  print(paste0("Variance of Intercept: ", var_intercept, ", Variance of Residual: ", var_residual, ", Adjusted SD: ", sd_adjust, 
+               "Adjusted Mean: ", mean_adjust))
   
   
   
